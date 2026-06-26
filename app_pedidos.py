@@ -58,6 +58,35 @@ st.markdown("""
         margin-bottom: 10px;
         border-left: 5px solid #7ac142;
     }
+    
+    /* Responsividade para Celulares */
+    @media (max-width: 800px) {
+        /* Imagens menores no celular */
+        .stImage img {
+            max-width: 150px !important;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        /* Carrinho fixo como uma barra no rodapé */
+        .carrinho-flutuante {
+            top: auto !important;
+            bottom: 0px !important;
+            right: 0px !important;
+            left: 0px !important;
+            width: 100% !important;
+            border-radius: 15px 15px 0 0 !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-bottom: none !important;
+            box-shadow: 0px -4px 10px rgba(0,0,0,0.15) !important;
+        }
+        
+        /* Espaço no final da página para o carrinho não sobrepor os itens */
+        .stApp {
+            padding-bottom: 45vh !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -207,7 +236,7 @@ try:
             valor_formatado = f"R$ {total_pedido:.2f}".replace(".", ",")
             
             # Construir o HTML completo da janela flutuante
-            cart_html = f"""<div style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
+            cart_html = f"""<div class="carrinho-flutuante" style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
 <h2 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; margin-top: 0; font-size: 1.8rem;">🛒 Resumo do Pedido</h2>
 <h3 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; font-size: 1.4rem;">Valor Total: <b>{valor_formatado}</b></h3>
 <div style="background-color: #e8f5e3; padding: 15px; border-radius: 8px; border: 1px solid #7ac142; margin: 15px 0; max-height: 35vh; overflow-y: auto;">
@@ -221,7 +250,7 @@ try:
             st.markdown(cart_html, unsafe_allow_html=True)
         else:
             # Janela flutuante vazia
-            empty_html = """<div style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
+            empty_html = """<div class="carrinho-flutuante" style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
 <h2 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; margin-top: 0; font-size: 1.8rem;">🛒 Resumo do Pedido</h2>
 <p style="color: #666; font-size: 1.1rem;">Seu carrinho está vazio.</p>
 </div>"""
