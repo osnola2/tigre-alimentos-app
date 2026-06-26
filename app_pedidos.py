@@ -61,9 +61,9 @@ st.markdown("""
     
     /* Responsividade para Celulares */
     @media (max-width: 800px) {
-        /* Imagens menores no celular */
+        /* Imagens ainda menores no celular */
         .stImage img {
-            max-width: 150px !important;
+            max-width: 90px !important;
             margin: 0 auto;
             display: block;
         }
