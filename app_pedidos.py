@@ -79,17 +79,17 @@ st.markdown("""
             border: none !important;
             border-top: 2px solid #7ac142 !important;
             box-shadow: 0px -4px 10px rgba(0,0,0,0.15) !important;
-            padding: 10px !important;
-            max-height: 20vh !important;
+            padding: 8px !important;
+            max-height: 25vh !important;
             overflow-y: auto !important; /* Rolar internamente */
         }
         
         /* Reduzir TODAS as fontes dentro do carrinho no mobile */
-        .carrinho-flutuante h2 { font-size: 1.1rem !important; margin: 0 !important; }
-        .carrinho-flutuante h3 { font-size: 1.0rem !important; margin: 2px 0 !important; }
-        .carrinho-flutuante p { font-size: 0.85rem !important; margin-bottom: 2px !important; }
+        .carrinho-flutuante h2 { font-size: 1.1rem !important; margin: 0 0 2px 0 !important; }
+        .carrinho-flutuante h3 { font-size: 1.0rem !important; margin: 0 !important; }
+        .carrinho-flutuante p { font-size: 0.8rem !important; margin: 0 !important; }
         .carrinho-flutuante div { font-size: 0.85rem !important; }
-        .carrinho-flutuante button { font-size: 0.9rem !important; padding: 10px !important; margin-top: 5px !important; }
+        .carrinho-flutuante button { font-size: 0.9rem !important; padding: 8px !important; margin-top: 2px !important; }
         
         /* Tirar a caixa com scroll duplo dentro do carrinho */
         .carrinho-flutuante > div {
@@ -252,16 +252,16 @@ try:
             valor_formatado = f"R$ {total_pedido:.2f}".replace(".", ",")
             
             # Construir o HTML completo da janela flutuante
-            cart_html = f"""<div class="carrinho-flutuante" style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
-<h2 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; margin-top: 0; font-size: 1.8rem;">🛒 Resumo do Pedido</h2>
-<p style="font-size: 0.85rem; color: #666; text-align: center; font-style: italic; margin-top: 2px; margin-bottom: 5px;">(Role para baixo para ver os detalhes 👇)</p>
-<h3 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; font-size: 1.4rem;">Valor Total: <b>{valor_formatado}</b></h3>
-<div style="background-color: #e8f5e3; padding: 15px; border-radius: 8px; border: 1px solid #7ac142; margin: 15px 0; max-height: 35vh; overflow-y: auto;">
-<p style="color: #000000; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Itens selecionados:</p>
-<div style="color: #000000; font-size: 1rem; line-height: 1.5;">{itens_html}</div>
+            cart_html = f"""<div class="carrinho-flutuante" style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
+<h2 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; margin: 0 0 5px 0; font-size: 1.6rem;">🛒 Resumo do Pedido</h2>
+<p style="font-size: 0.85rem; color: #666; text-align: center; font-style: italic; margin: 0 0 5px 0;">(Role para baixo para ver os detalhes 👇)</p>
+<h3 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; font-size: 1.3rem; margin: 0;">Valor Total: <b>{valor_formatado}</b></h3>
+<div style="background-color: #e8f5e3; padding: 10px; border-radius: 8px; border: 1px solid #7ac142; margin: 10px 0; max-height: 35vh; overflow-y: auto;">
+<p style="color: #000000; font-weight: bold; margin: 0 0 5px 0; font-size: 1rem;">Itens selecionados:</p>
+<div style="color: #000000; font-size: 0.95rem; line-height: 1.4;">{itens_html}</div>
 </div>
 <a href="{link_whatsapp}" target="_blank" style="text-decoration: none;">
-<button style="background-color:#25D366;color:white;padding:15px 20px;border:none;border-radius:5px;font-size:16px;font-weight:bold;cursor:pointer;width:100%;margin-top:10px;box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">Enviar Pedido via WhatsApp 📲</button>
+<button style="background-color:#25D366;color:white;padding:12px 15px;border:none;border-radius:5px;font-size:15px;font-weight:bold;cursor:pointer;width:100%;margin-top:5px;box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">Enviar Pedido via WhatsApp 📲</button>
 </a>
 </div>"""
             st.markdown(cart_html, unsafe_allow_html=True)
