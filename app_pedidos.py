@@ -254,8 +254,8 @@ try:
             # Construir o HTML completo da janela flutuante
             cart_html = f"""<div class="carrinho-flutuante" style="position: fixed; top: 80px; right: 5%; width: 25%; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); border: 2px solid #7ac142; z-index: 9999;">
 <h2 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; margin-top: 0; font-size: 1.8rem;">🛒 Resumo do Pedido</h2>
-<h3 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; font-size: 1.4rem;">Valor Total: <b>{valor_formatado}</b></h3>
 <p style="font-size: 0.85rem; color: #666; text-align: center; font-style: italic; margin-top: 2px; margin-bottom: 5px;">(Role para baixo para ver os detalhes 👇)</p>
+<h3 style="color: #1a4d2e; font-family: 'Arial Black', sans-serif; font-size: 1.4rem;">Valor Total: <b>{valor_formatado}</b></h3>
 <div style="background-color: #e8f5e3; padding: 15px; border-radius: 8px; border: 1px solid #7ac142; margin: 15px 0; max-height: 35vh; overflow-y: auto;">
 <p style="color: #000000; font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">Itens selecionados:</p>
 <div style="color: #000000; font-size: 1rem; line-height: 1.5;">{itens_html}</div>
