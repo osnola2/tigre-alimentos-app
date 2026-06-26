@@ -68,7 +68,7 @@ st.markdown("""
             display: block;
         }
         
-        /* Carrinho fixo como uma barra no rodapé */
+        /* Carrinho fixo no rodapé, max 20% da tela, com fontes reduzidas */
         .carrinho-flutuante {
             top: auto !important;
             bottom: 0px !important;
@@ -76,15 +76,31 @@ st.markdown("""
             left: 0px !important;
             width: 100% !important;
             border-radius: 15px 15px 0 0 !important;
-            border-left: none !important;
-            border-right: none !important;
-            border-bottom: none !important;
+            border: none !important;
+            border-top: 2px solid #7ac142 !important;
             box-shadow: 0px -4px 10px rgba(0,0,0,0.15) !important;
+            padding: 10px !important;
+            max-height: 20vh !important;
+            overflow-y: auto !important; /* Rolar internamente */
+        }
+        
+        /* Reduzir TODAS as fontes dentro do carrinho no mobile */
+        .carrinho-flutuante h2 { font-size: 1.1rem !important; margin: 0 !important; }
+        .carrinho-flutuante h3 { font-size: 1.0rem !important; margin: 2px 0 !important; }
+        .carrinho-flutuante p { font-size: 0.85rem !important; margin-bottom: 2px !important; }
+        .carrinho-flutuante div { font-size: 0.85rem !important; }
+        .carrinho-flutuante button { font-size: 0.9rem !important; padding: 10px !important; margin-top: 5px !important; }
+        
+        /* Tirar a caixa com scroll duplo dentro do carrinho */
+        .carrinho-flutuante > div {
+            max-height: none !important;
+            margin: 5px 0 !important;
+            padding: 8px !important;
         }
         
         /* Espaço no final da página para o carrinho não sobrepor os itens */
         .stApp {
-            padding-bottom: 45vh !important;
+            padding-bottom: 25vh !important;
         }
     }
 </style>
