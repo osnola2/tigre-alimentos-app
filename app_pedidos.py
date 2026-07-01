@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import urllib.parse
 import os
+import unicodedata
 
 # Configuração da página
 st.set_page_config(page_title="Tigre Alimentos - Pedidos", page_icon="🐅", layout="wide")
@@ -154,6 +155,17 @@ try:
     mtime = os.path.getmtime(caminho_planilha) if os.path.exists(caminho_planilha) else 0
     df_produtos = carregar_dados(mtime)
     
+    def normalizar_nome(texto):
+        texto_norm = unicodedata.normalize('NFKD', str(texto)).encode('ASCII', 'ignore').decode('ASCII')
+        return "".join([c for c in texto_norm if c.isalnum()]).lower()
+
+    mapa_fotos = {}
+    if os.path.exists("fotos_de_produtos"):
+        for arq in os.listdir("fotos_de_produtos"):
+            if arq.lower().endswith((".png", ".jpg", ".jpeg")):
+                nome_base = os.path.splitext(arq)[0]
+                mapa_fotos[normalizar_nome(nome_base)] = os.path.join("fotos_de_produtos", arq)
+    
     st.write("Selecione a quantidade desejada de fardos/caixas de cada produto:")
     
     # Inicializar variáveis de controle do carrinho
@@ -209,13 +221,10 @@ try:
                     preco_fardo = row['PREÇO_FD']
                     preco_unidade = row['PREÇO_UN']
                     
-                    # Limpar o nome do produto para procurar o arquivo de imagem
-                    nome_arquivo = "".join([c for c in produto if c.isalpha() or c.isdigit() or c==' ']).rstrip()
-                    caminho_imagem = f"fotos_de_produtos/{nome_arquivo}.png"
-                    
-                    # Definir a imagem do produto (usa a foto recortada se existir, ou o placeholder)
-                    if os.path.exists(caminho_imagem):
-                        url_imagem = caminho_imagem
+                    # Buscar imagem de forma inteligente (insensível a acentos, maiúsculas/minúsculas e símbolos)
+                    chave_norm = normalizar_nome(produto)
+                    if chave_norm in mapa_fotos:
+                        url_imagem = mapa_fotos[chave_norm]
                     else:
                         url_imagem = row.get('IMAGEM', "https://dummyimage.com/100x100/7ac142/ffffff.png&text=Foto")
                         if pd.isna(url_imagem):
