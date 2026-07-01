@@ -154,13 +154,7 @@ try:
     mtime = os.path.getmtime(caminho_planilha) if os.path.exists(caminho_planilha) else 0
     df_produtos = carregar_dados(mtime)
     
-    col_texto, col_botao = st.columns([8, 2], vertical_alignment="center")
-    with col_texto:
-        st.write("Selecione a quantidade desejada de fardos/caixas de cada produto:")
-    with col_botao:
-        if st.button("🔄 Atualizar Preços", use_container_width=True, help="Clique aqui para recarregar a planilha caso tenha alterado no Excel"):
-            st.cache_data.clear()
-            st.rerun()
+    st.write("Selecione a quantidade desejada de fardos/caixas de cada produto:")
     
     # Inicializar variáveis de controle do carrinho
     if 'carrinho' not in st.session_state:
