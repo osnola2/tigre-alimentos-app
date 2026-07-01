@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import urllib.parse
+import os
 
 # Configuração da página
 st.set_page_config(page_title="Tigre Alimentos - Pedidos", page_icon="🐅", layout="wide")
@@ -110,9 +111,8 @@ st.markdown("""
 st.markdown("<h1 style='text-align: center; color: #1a4d2e;'>🐅 TIGRE ALIMENTOS</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #7ac142;'>Tabela de Produtos (Gerador de Pedidos)</h3>", unsafe_allow_html=True)
 st.markdown("---")
-
 @st.cache_data
-def carregar_dados():
+def carregar_dados(mtime):
     # Carregando a planilha excel
     df = pd.read_excel('Produtos_tigre_pedido_exemplo.xlsx')
     
@@ -135,7 +135,7 @@ def carregar_dados():
         if p == 'AMENDOIM': return 'AMENDOINS'
         if p in ['ACUCAR', 'AÇUCAR', 'AÇÚCAR', 'SAL', 'BICARBONATO']: return 'SAIS E AÇÚCARES'
         if p in ['FEIJAO', 'FEIJÃO']: return 'FEIJÕES'
-        if p in ['FARINHA', 'FAROFA', 'FUBA', 'FUBÁ', 'FÚBA', 'TAPIOCA', 'POLVILHO']: return 'FARINHAS'
+        if p in ['FARINHA', 'FAROFA', 'FUBA', 'FÚBA', 'TAPIOCA', 'POLVILHO']: return 'FARINHAS'
         if p in ['DOCE', 'MELADO', 'RAPADURA', 'SAGU']: return 'DOCES'
         
         # Agrupar grãos e sementes
@@ -150,9 +150,17 @@ def carregar_dados():
     return df
 
 try:
-    df_produtos = carregar_dados()
+    caminho_planilha = 'Produtos_tigre_pedido_exemplo.xlsx'
+    mtime = os.path.getmtime(caminho_planilha) if os.path.exists(caminho_planilha) else 0
+    df_produtos = carregar_dados(mtime)
     
-    st.write("Selecione a quantidade desejada de fardos/caixas de cada produto:")
+    col_texto, col_botao = st.columns([8, 2], vertical_alignment="center")
+    with col_texto:
+        st.write("Selecione a quantidade desejada de fardos/caixas de cada produto:")
+    with col_botao:
+        if st.button("🔄 Atualizar Preços", use_container_width=True, help="Clique aqui para recarregar a planilha caso tenha alterado no Excel"):
+            st.cache_data.clear()
+            st.rerun()
     
     # Inicializar variáveis de controle do carrinho
     if 'carrinho' not in st.session_state:
@@ -208,7 +216,6 @@ try:
                     preco_unidade = row['PREÇO_UN']
                     
                     # Limpar o nome do produto para procurar o arquivo de imagem
-                    import os
                     nome_arquivo = "".join([c for c in produto if c.isalpha() or c.isdigit() or c==' ']).rstrip()
                     caminho_imagem = f"fotos_de_produtos/{nome_arquivo}.png"
                     
