@@ -71,8 +71,35 @@ st.markdown("""
         display: block;
     }
     
+    /* Banner do Cabeçalho (Desktop - reduzido em ~60%) */
+    .banner-header {
+        background-color: #3a7227;
+        width: 100%;
+        padding: 8px 0;
+        text-align: center;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.12);
+    }
+    .banner-img {
+        max-height: 80px;
+        max-width: 95%;
+        object-fit: contain;
+    }
+    
     /* Responsividade para Celulares */
     @media (max-width: 800px) {
+        /* Banner do Cabeçalho ultra-compacto no celular (reduzido ~60%) */
+        .banner-header {
+            padding: 4px 0 !important;
+            margin-bottom: 6px !important;
+            border-radius: 6px !important;
+        }
+        .banner-img {
+            max-height: 38px !important;
+            max-width: 90% !important;
+        }
+        
         /* Imagens uniformes e adaptadas no celular */
         .produto-container [data-testid="stImage"] img, .produto-container .stImage img, .stImage img {
             height: 80px !important;
@@ -125,8 +152,8 @@ if os.path.exists("logo_header.png"):
     with open("logo_header.png", "rb") as f:
         data_img = base64.b64encode(f.read()).decode("utf-8")
     st.markdown(f'''
-        <div style="background-color: #3a7227; width: 100%; padding: 20px 0; text-align: center; border-radius: 12px; margin-bottom: 15px; box-shadow: 0px 4px 12px rgba(0,0,0,0.15);">
-            <img src="data:image/png;base64,{data_img}" style="max-height: 200px; max-width: 95%; object-fit: contain;">
+        <div class="banner-header">
+            <img class="banner-img" src="data:image/png;base64,{data_img}">
         </div>
     ''', unsafe_allow_html=True)
 else:
