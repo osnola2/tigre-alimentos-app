@@ -3,6 +3,7 @@ import pandas as pd
 import urllib.parse
 import os
 import unicodedata
+import base64
 
 # Configuração da página
 st.set_page_config(page_title="Tigre Alimentos - Pedidos", page_icon="🐅", layout="wide")
@@ -119,8 +120,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Título
-st.markdown("<h1 style='text-align: center; color: #1a4d2e;'>🐅 TIGRE ALIMENTOS</h1>", unsafe_allow_html=True)
+# Título / Cabeçalho
+if os.path.exists("logo_header.png"):
+    with open("logo_header.png", "rb") as f:
+        data_img = base64.b64encode(f.read()).decode("utf-8")
+    st.markdown(f'''
+        <div style="background-color: #3a7227; width: 100%; padding: 20px 0; text-align: center; border-radius: 12px; margin-bottom: 15px; box-shadow: 0px 4px 12px rgba(0,0,0,0.15);">
+            <img src="data:image/png;base64,{data_img}" style="max-height: 200px; max-width: 95%; object-fit: contain;">
+        </div>
+    ''', unsafe_allow_html=True)
+else:
+    st.markdown("<h1 style='text-align: center; color: #1a4d2e;'>🐅 TIGRE ALIMENTOS</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #7ac142;'>Tabela de Produtos (Gerador de Pedidos)</h3>", unsafe_allow_html=True)
 st.markdown("---")
 @st.cache_data
