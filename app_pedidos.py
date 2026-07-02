@@ -61,11 +61,22 @@ st.markdown("""
         border-left: 5px solid #7ac142;
     }
     
+    /* Uniformizar o tamanho e proporção de todas as fotos dos produtos */
+    .produto-container [data-testid="stImage"] img, .produto-container .stImage img, .stImage img {
+        height: 110px !important;
+        width: 100% !important;
+        object-fit: contain !important;
+        margin: 0 auto;
+        display: block;
+    }
+    
     /* Responsividade para Celulares */
     @media (max-width: 800px) {
-        /* Imagens ainda menores no celular */
-        .stImage img {
-            max-width: 90px !important;
+        /* Imagens uniformes e adaptadas no celular */
+        .produto-container [data-testid="stImage"] img, .produto-container .stImage img, .stImage img {
+            height: 80px !important;
+            max-width: 80px !important;
+            object-fit: contain !important;
             margin: 0 auto;
             display: block;
         }
@@ -214,7 +225,10 @@ try:
             emoji = emojis.get(cat, '📦') # Usa a caixa genérica caso não ache a categoria
             # Expanders colapsáveis para cada categoria
             with st.expander(f"{emoji} {cat}", expanded=False):
-                df_cat = df_produtos[df_produtos['CATEGORIA'] == cat].sort_values(by='PRODUTOS')
+                df_cat = df_produtos[df_produtos['CATEGORIA'] == cat].sort_values(
+                    by='PRODUTOS',
+                    key=lambda col: col.astype(str).apply(lambda s: unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore').decode('ASCII').upper())
+                )
                 
                 for index, row in df_cat.iterrows():
                     produto = row['PRODUTOS'].strip()
