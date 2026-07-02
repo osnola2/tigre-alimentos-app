@@ -71,33 +71,33 @@ st.markdown("""
         display: block;
     }
     
-    /* Banner do Cabeçalho (Desktop - reduzido em ~60%) */
+    /* Banner do Cabeçalho (Desktop - altura ajustada em +50%) */
     .banner-header {
         background-color: #3a7227;
         width: 100%;
-        padding: 8px 0;
+        padding: 12px 0;
         text-align: center;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        box-shadow: 0px 3px 8px rgba(0,0,0,0.12);
+        border-radius: 10px;
+        margin-bottom: 12px;
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.12);
     }
     .banner-img {
-        max-height: 80px;
+        max-height: 120px;
         max-width: 95%;
         object-fit: contain;
     }
     
     /* Responsividade para Celulares */
     @media (max-width: 800px) {
-        /* Banner do Cabeçalho ultra-compacto no celular (reduzido ~60%) */
+        /* Banner do Cabeçalho com altura ajustada no celular (+50%) */
         .banner-header {
-            padding: 4px 0 !important;
-            margin-bottom: 6px !important;
-            border-radius: 6px !important;
+            padding: 6px 0 !important;
+            margin-bottom: 8px !important;
+            border-radius: 8px !important;
         }
         .banner-img {
-            max-height: 38px !important;
-            max-width: 90% !important;
+            max-height: 58px !important;
+            max-width: 92% !important;
         }
         
         /* Imagens uniformes e adaptadas no celular */
