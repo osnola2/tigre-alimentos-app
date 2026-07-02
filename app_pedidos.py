@@ -137,7 +137,7 @@ def carregar_dados(mtime):
         if p in ['ACUCAR', 'AÇUCAR', 'AÇÚCAR', 'SAL', 'BICARBONATO']: return 'SAIS E AÇÚCARES'
         if p in ['FEIJAO', 'FEIJÃO']: return 'FEIJÕES'
         if p in ['FARINHA', 'FAROFA', 'FUBA', 'FÚBA', 'TAPIOCA', 'POLVILHO']: return 'FARINHAS'
-        if p in ['DOCE', 'MELADO', 'RAPADURA', 'SAGU']: return 'DOCES'
+        if p in ['DOCE', 'MELADO', 'RAPADURA', 'SAGU', 'PAÇOCA', 'PACOCA', 'PAÇOQUINHA']: return 'DOCES'
         
         # Agrupar grãos e sementes
         graos = ['ERVILHA', 'GRAO', 'GRÃO', 'FÁBA', 'FAVA', 'GIRASSOL', 'LENTILHA', 'MILHO', 'PIPOCA', 'SOJA', 'CANJICA', 'CANJIQUINHA', 'TRIGO']
@@ -214,7 +214,7 @@ try:
             emoji = emojis.get(cat, '📦') # Usa a caixa genérica caso não ache a categoria
             # Expanders colapsáveis para cada categoria
             with st.expander(f"{emoji} {cat}", expanded=False):
-                df_cat = df_produtos[df_produtos['CATEGORIA'] == cat]
+                df_cat = df_produtos[df_produtos['CATEGORIA'] == cat].sort_values(by='PRODUTOS')
                 
                 for index, row in df_cat.iterrows():
                     produto = row['PRODUTOS'].strip()
