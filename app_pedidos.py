@@ -162,8 +162,8 @@ st.markdown("<h3 style='text-align: center; color: #7ac142;'>Tabela de Produtos 
 st.markdown("---")
 @st.cache_data
 def carregar_dados(mtime):
-    # Carregando a planilha excel
-    df = pd.read_excel('Produtos_tigre_pedido_exemplo.xlsx')
+    # Carregando a planilha CSV
+    df = pd.read_csv('produtos_tigre_pedido.csv')
     
     # Limpando os dados
     df = df.dropna(subset=['PRODUTOS', 'PREÇO_UN', 'PREÇO_FD']) # Remover linhas sem produto ou preço
@@ -199,7 +199,7 @@ def carregar_dados(mtime):
     return df
 
 try:
-    caminho_planilha = 'Produtos_tigre_pedido_exemplo.xlsx'
+    caminho_planilha = 'produtos_tigre_pedido.csv'
     mtime = os.path.getmtime(caminho_planilha) if os.path.exists(caminho_planilha) else 0
     df_produtos = carregar_dados(mtime)
     
@@ -336,4 +336,4 @@ try:
 
 except Exception as e:
     st.error(f"Erro ao ler a planilha: {e}")
-    st.write("Certifique-se de que o arquivo 'Produtos_tigre_pedido_exemplo.xlsx' está na mesma pasta.")
+    st.write("Certifique-se de que o arquivo 'produtos_tigre_pedido.csv' está na mesma pasta.")
